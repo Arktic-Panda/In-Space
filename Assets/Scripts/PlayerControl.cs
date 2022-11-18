@@ -11,6 +11,8 @@ public class PlayerControl : MonoBehaviour
     public float verticalVelocity;
     private CharacterController controller;
     private int desiredLane = 1;
+    private float acceleration;
+    private float speedBoost;
 
 
     // Start is called before the first frame update
@@ -39,10 +41,20 @@ public class PlayerControl : MonoBehaviour
         else if (desiredLane == 2)
             targetPosition += Vector3.right * LANE_DISTANCE;
 
+
+       
+        for (int i = 0; i < 10; i++)
+        {
+            acceleration += 0.03f * Time.deltaTime;
+        }
+
+
+        Debug.Log( acceleration );
+
         Vector3 moveVector = Vector3.zero;
         moveVector.x = (targetPosition - transform.position).normalized.x * speed;
         moveVector.y = -0.1f;
-        moveVector.z = speed;
+        moveVector.z = speed + acceleration ;
 
         controller.Move(moveVector * Time.deltaTime);
     }
