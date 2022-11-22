@@ -49,12 +49,12 @@ public class PlayerControl : MonoBehaviour
         }
 
 
-        Debug.Log( acceleration );
+        //Debug.Log( acceleration );
 
         Vector3 moveVector = Vector3.zero;
         moveVector.x = (targetPosition - transform.position).normalized.x * speed;
         moveVector.y = -0.1f;
-        moveVector.z = speed + acceleration ;
+     
 
         controller.Move(moveVector * Time.deltaTime);
     }

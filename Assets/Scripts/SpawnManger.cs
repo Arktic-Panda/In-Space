@@ -5,12 +5,10 @@ using UnityEngine;
 public class SpawnManger : MonoBehaviour
 {
     public GameObject[] asteroidPrefab;
-    private float xRange = 9.8f;
     private float zRange = 30;
     public float spawnDelay;
     public float spawnInterval;
-
-
+    
     // Start is called before the first frame update
     void Start()
     {   
@@ -24,13 +22,21 @@ public class SpawnManger : MonoBehaviour
         
     }
 
-    //Spawn animal method
+    //Spawn Asteroid method
     void SpawnAsteroid()
     {
-        int animalIndex = Random.Range(0, asteroidPrefab.Length);
-        Vector3 spawnPos = new Vector3(Random.Range(xRange,-xRange), 0, zRange);
-
-        Instantiate(asteroidPrefab[animalIndex], spawnPos, asteroidPrefab[animalIndex].transform.rotation);
+        //Setting X plane spawn positions in Array
+        float [] laneNumber = new float [] {-5.5f,0,5.5f};
+        //Generating Random spawn X postion
+        System.Random random = new System.Random();
+        float laneX = laneNumber[random.Next(0,laneNumber.Length)] ;
+       
+        //Spawning Random prefab of Asteroid
+        int asteroidIndex = Random.Range(0, asteroidPrefab.Length);
+        //Spawn Position
+        Vector3 spawnPos = new Vector3(laneX, 0.7f, zRange);
+        //Generating Prefab into scene
+        Instantiate(asteroidPrefab[asteroidIndex], spawnPos, asteroidPrefab[asteroidIndex].transform.rotation);
     }  
     
 }
